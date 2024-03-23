@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Poppins";
+    color: black;
+    background-color: #f6f8fa;
+    padding: 2rem;
+}
+h1{
+    text-align: center;
+    font-size: 1.5rem;
+}
+main{
+    max-width: 400px; 
+    margin: 1rem auto;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+header{
+    background-color: rgb(23, 126, 129);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+header div{
+    padding: 5px;
+}
+header div:first-child{
+    flex-basis: 100%;
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+header div:nth-child(n+2){
+    flex-basis: 50%;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+header h5{
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+h3 ,header{
+    margin-bottom: 0.5rem;
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+form input, form button{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 40px;
+    font-family: "Poppins";
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+form button{
+    border: none;
+    background-color:rgb(23, 126, 129);
+    font-weight: 600;
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+form div:first-child{
+    flex-basis: 100%;
+}
+form div:nth-child(n+2){
+    flex-basis: calc(50% - 5px);
+}
+
+form label{
+    font-size: 0.85rem;
+    font-weight: 500;
+}
