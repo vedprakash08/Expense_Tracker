@@ -50,7 +50,7 @@ header h5{
     font-weight: 600;
 }
 
-h3 ,header{
+h3 ,header, ul, #status{
     margin-bottom: 0.5rem;
 }
 form{
@@ -87,4 +87,61 @@ form div:nth-child(n+2){
 form label{
     font-size: 0.85rem;
     font-weight: 500;
+}
+
+ul{
+    list-style-type: none;
+}
+#status{
+    text-align: center;
+}
+
+ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 10px;
+    position: relative;
+}
+ul li:hover{
+    background-color:rgba(0,0,0,0.1) ;
+}
+.name{
+    flex:1;
+}
+.name h4{
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.name p{
+    font-size: 0.8rem;
+}
+.amount{
+    font-weight: 500;
+}
+
+.action{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: #fff;
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: all 300ms;
+}
+
+.action svg{
+    widows: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+ul li:hover .action{
+    transform: scaleX(1);
 }
