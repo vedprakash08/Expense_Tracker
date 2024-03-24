@@ -1,4 +1,61 @@
-const transactions = [];
+const transactions = [
+    {
+        id: 1,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    },
+    {
+        id: 2,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    },
+    {
+        id: 3,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "expense",
+    },
+    {
+        id: 4,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    },
+    {
+        id: 5,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "expense",
+    },
+    {
+        id: 5,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    },
+    {
+        id: 5,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    },
+    {
+        id: 5,
+        name: "dd",
+        amount: "8463",
+        date: new Date(),
+        type : "income",
+    }
+];
 
 const list=document.getElementById("transactionList");
 const status= document.getElementById("status");
@@ -31,6 +88,7 @@ function makeList(){
 
     if(transactions.length===0){
         status.textContent = "No transactions.";
+
         return;
     }
     else{
