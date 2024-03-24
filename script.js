@@ -1,34 +1,31 @@
-const transactions = [
-    {
-        id:1,
-        name: 'salary',
-        amount:'5000',
-        date : new Date(),
-        type:'income'
-    },
-    {
-        id:2,
-        name: 'haircut',
-        amount:'300',
-        date : new Date(),
-        type:'expense'
-    },
-    {
-        id:3,
-        name: 'picnic',
-        amount:'1000',
-        date : new Date(),
-        type:'expense'
-    }
-];
+const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 const list=document.getElementById("transactionList");
 const status= document.getElementById("status");
 
+const income= document.getElementById("income");
+const expense=document.getElementById("expense");
+const balance= document.getElementById("balance");
+
+const form=document.getElementById("transactionForm");
+form.addEventListener('submit', addTransaction);
 
 const formatter = new Intl.NumberFormat('en-IN',{
     style:'currency', currency:'INR',signDisplay: 'always'
 });
+
+
+function updateList(){
+    const incomeTotal= transactions.filter((x)=> x.type === "income").reduce((total,x)=> parseFloat(total)+parseFloat(x.amount),0);
+
+    const expenseTotal= transactions.filter((x)=> x.type === "expense").reduce((total,x)=> parseFloat(total)+parseFloat(x.amount),0);
+
+    const balanceTotal= incomeTotal-expenseTotal;
+
+    balance.textContent= formatter.format(balanceTotal).substring(1);
+    income.textContent= formatter.format(incomeTotal);
+    expense.textContent= formatter.format(expenseTotal*-1);
+}
 function makeList(){
     list.innerHTML="";
 
@@ -36,14 +33,19 @@ function makeList(){
         status.textContent = "No transactions.";
         return;
     }
+    else{
+        status.textContent = "";
+    }
     transactions.forEach((transaction)=>{
+
+        const sign= 'income' === transaction.type? +1:-1;
         const node=document.createElement("li");
         node.innerHTML = `
         <div class="name">
             <h4>${transaction.name}</h4>
             <p>${new Date(transaction.date).toLocaleDateString()}</p>
         </div>
-        <div class ="amount">${formatter.format(transaction.amount)}</div>
+        <div class ="amount">${formatter.format(transaction.amount *sign)}</div>
 
         <div class ="action">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" onclick="deleteTrans(${transaction.id})">
@@ -58,13 +60,38 @@ function makeList(){
 }
 
 makeList();
-
+saveTransactions();
+updateList();
 function deleteTrans(id){
     const index = transactions.findIndex((x) => {
         if(x.id === id)
         return x;
     });
-    console.log(index+1)
     transactions.splice(index,1);
     makeList();
+    saveTransactions();
+    updateList();
 }
+
+function addTransaction(e){
+    e.preventDefault();
+    const formData= new FormData(this);
+    transactions.push({
+        id: transactions.length+1,
+        name: formData.get("name"),
+        amount: parseFloat(formData.get("amount")),
+        date: new Date(formData.get("date")),
+        type: null === formData.get("type") ? "income":"expense",
+    });
+
+    this.reset();
+    updateList();
+    saveTransactions();
+    makeList();
+}
+
+function saveTransactions() {
+    transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }

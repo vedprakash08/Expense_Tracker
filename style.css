@@ -59,7 +59,7 @@ form{
     gap: 10px;
 }
 
-form input, form button{
+form input:not(#type), form button{
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -77,13 +77,49 @@ form button{
     font-size: 1rem;
     text-transform: uppercase;
 }
-form div:first-child{
+form div:nth-child(n-2){
     flex-basis: 100%;
 }
-form div:nth-child(n+2){
+form div:nth-child(n+3){
     flex-basis: calc(50% - 5px);
 }
+input#type{
+    appearance: none;
+    position: absolute;
+}
 
+.option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    position: relative;
+}
+
+.option span{
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.option::before{
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    background-color: #fff;
+    height: calc(100% - 10px);
+    width: calc(50% - 10px);
+    transform: translateX(5px);
+    border-radius: inherit;
+    transition: all 150ms;
+}
+input#type:checked ~ .option::before{
+    left: 50%;
+}
 form label{
     font-size: 0.85rem;
     font-weight: 500;
