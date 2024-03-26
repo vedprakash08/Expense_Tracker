@@ -1,4 +1,4 @@
-const transactions = [];
+const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 const list=document.getElementById("transactionList");
 const status= document.getElementById("status");
@@ -62,6 +62,7 @@ function makeList(){
 
 makeList();
 updateList();
+saveTransactions();
 function deleteTrans(id){
     const index = transactions.findIndex((x) => {
         if(x.id === id)
@@ -70,6 +71,7 @@ function deleteTrans(id){
     transactions.splice(index,1);
     makeList();
     updateList();
+    saveTransactions();
 }
 
 function addTransaction(e){
@@ -84,7 +86,13 @@ function addTransaction(e){
     });
 
     this.reset();
-    updateList();
     makeList();
+    updateList();
+    saveTransactions();
 }
 
+function saveTransactions() {
+    transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+  
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }
